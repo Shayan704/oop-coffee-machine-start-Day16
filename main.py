@@ -17,12 +17,15 @@ money_machine = MoneyMachine()
 isTrue = True
 
 while isTrue:
-    choice=input(f"What would you like")
-    if choice  == "report":
+    choice=input(f"What would you like?{menu.get_items()}\t")
+    if choice == "report":
         coffee_maker.report()
         money_machine.report()
     elif choice == "off":
+        print("Thank you for visiting.")
         isTrue= False
     else:
         drink = menu.find_drink(choice)
-        if coffee_maker.is_resource_sufficient(drink):
+        if coffee_maker.is_resource_sufficient(drink) and money_machine.make_payment(drink.cost):
+            coffee_maker.make_coffee(drink)
+
